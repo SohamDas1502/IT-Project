@@ -1,0 +1,201 @@
+You are a meditation teacher and scriptwriter.
+
+Write a 10-minute guided meditation.
+
+You MUST return a single well-formed XML document and NOTHING else (no markdown, no commentary, no code fences).
+
+XML FORMAT REQUIREMENTS:
+- Root element: <meditation duration_minutes="10" language="simple" includes_pauses="true">
+- Include <inputs> showing the provided values (context, weatherCondition, and the raw elevation/segment source block) so I can trace what was used.
+- Then include exactly three <section> elements in this order:
+  1) <section type="focused_attention">
+  2) <section type="compassion_meditation">
+  3) <section type="closing_meditation">
+- Each <section> MUST include:
+  - <min_words>...</min_words> with the minimum word requirement value
+  - <narration id="num">...</narration> containing the meditation text for that section (simple language, occasional "(pause)", avoid medical claims, end gently).
+- Focused attention section MUST ALSO include <segments> with one <segment> per road segment from the provided elevation data.
+- For each <segment> include:
+  - <segment_header_raw>...</segment_header_raw>  (COPY EXACTLY as given in the elevation data line; do not modify any characters)
+  - <route_label>...</route_label>
+  - <start lat="..." lon="..." label="..."/>
+  - <end lat="..." lon="..." label="..."/>
+  - <elevation_raw>...</elevation_raw>  (COPY EXACTLY the bracketed elevation details, including punctuation)
+  - <narration id="nume">...</narration>  (segment-specific meditation text)
+- When referencing elevation in the script, DO NOT use numeric elevation values; instead use words like "uphill", "flat", "downhill" as metaphor and felt-sense guidance.
+- However, the <segment_header_raw> and <elevation_raw> fields must preserve the exact input text without changes.
+- Narration id (<narration id="num">) are local to each section. Start from 1 when you start a new section
+
+CONTENT REQUIREMENTS:
+1) Focused attention component:
+- Minimum {FAM_word_count} words.
+- Walking meditation: set the background, attention to walking, sensations, muscles.
+- Incorporate current weather condition: {weatherCondition}.
+- Incorporate elevation details segment-wise using the segments provided in {source_to_park}.
+
+2) Compassion meditation:
+- Minimum {CM_word_count} words.
+- Compassion-focused content in a park.
+- Incorporate current weather condition: {weatherCondition}.
+
+3) Closing meditation:
+- Minimum {Closing_word_count} words.
+- Address the purpose: {context}.
+- End gently.
+
+INPUTS:
+- context: {context}
+- weatherCondition: {weatherCondition}
+- elevation/segments source (copy exactly; do not alter): 
+{source_to_park}
+
+CHECK BELOW EXAMPLE FOR DETAILS:
+
+<?xml version="1.0" encoding="utf-8"?>
+<meditation duration_minutes="10" language="simple" includes_pauses="true">
+  <inputs>
+    <context>stressful meeting</context>
+    <weatherCondition>Partly sunny</weatherCondition>
+    <elevationSegments>
+      source @ -37.80856,144.95947
+      -&gt; Franklin St toward Elizabeth St  Start_1 @ -37.80856,144.95947 End_1 @ -37.80680,144.96447 [high elevation (uphill); ^ +10.7m; 18.6 -&gt; 29.3m]
+      -&gt; Cardigan St  Start_2 @ -37.80680,144.96447 End_2 @ -37.80324,144.96522 [high elevation (uphill); ^ +8.4m; 29.3 -&gt; 37.7m]
+      -&gt; Pelham St  Start_3 @ -37.80324,144.96522 End_3 @ -37.80310,144.96789 [low elevation (mostly flat); ^ +3.2m; 37.7 -&gt; 41.0m]
+      -&gt; the left  Start_4 @ -37.80310,144.96789 End_4 @ -37.79944,144.96852 [low elevation (mostly flat); ^ +1.6m; 41.0 -&gt; 42.5m]
+      -&gt; destination @ -37.79944,144.96852
+    </elevationSegments>
+  </inputs>
+  <section type="focused_attention">
+    <min_words>1250.0</min_words>
+    <narration id="1">
+      Welcome to this walking meditation on a partly sunny day. As you prepare to walk, bring your awareness to the feeling of your feet touching the ground. Notice the gentle warmth of the sun, shining softly through patches of cloud. (pause) 
+      </narration>
+    <narration id="2">
+      Feel the air as it brushes your skin, lightly and kindly. Begin to step slowly and mindfully, with your full attention on the movements of your body. (pause)
+    </narration>
+    <narration id="3">
+      Sense the muscles in your legs as they activate with each step. Feel the subtle tightening and releasing as you lift your foot, then place it down. The rhythm of walking is natural and steady. Embrace the steady beat, like a drum in your body, guiding you onward. (pause)
+      </narration>
+    <narration id="4">
+      Now, as we begin to move along Franklin St toward Elizabeth St, notice the path rising gently ahead. The road takes you uphill, inviting you to engage with a feeling of effort and calm strength. With each step up this incline, feel your legs working steadily, your breath steady and even. The ground supports you as you walk, solid beneath your feet. (pause)
+    </narration>
+    <segments>
+      <segment>
+        <segment_header_raw>-> Franklin St toward Elizabeth St  Start_1 @ -37.80856,144.95947 End_1 @ -37.80680,144.96447 [high elevation (uphill); ^ +10.7m; 18.6 -> 29.3m]</segment_header_raw>
+        <route_label>Franklin St toward Elizabeth St</route_label>
+        <start lat="-37.80856" lon="144.95947" label="Start_1"/>
+        <end lat="-37.80680" lon="144.96447" label="End_1"/>
+        <elevation_raw>[high elevation (uphill); ^ +10.7m; 18.6 -> 29.3m]</elevation_raw>
+        <narration id="4">
+          As you walk this first segment, the steady uphill invites you to notice the strength in your legs and the rhythm of your breath. Each step upward is gentle but purposeful. Feel the earth beneath, stable and sure. The sun filters through the clouds, warming your skin and encouraging openness in your chest. (pause) With every footfall, your body adjusts naturally to the incline, muscles engaging and releasing with grace. This uphill is like a metaphor for challenges that rise before you — steadily and with the possibility to be met with calm determination.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>-> Cardigan St  Start_2 @ -37.80680,144.96447 End_2 @ -37.80324,144.96522 [high elevation (uphill); ^ +8.4m; 29.3 -> 37.7m]</segment_header_raw>
+        <route_label>Cardigan St</route_label>
+        <start lat="-37.80680" lon="144.96447" label="Start_2"/>
+        <end lat="-37.80324" lon="144.96522" label="End_2"/>
+        <elevation_raw>[high elevation (uphill); ^ +8.4m; 29.3 -> 37.7m]</elevation_raw>
+        <narration id="5">
+          Moving into Cardigan St, notice the continuation of the uphill journey. Your body remembers the rhythm now, steady and calm. Feel the engagement in your calves and thighs as you step upward with ease. The sky is partly sunny, and light shifts softly on your path, bringing a sense of warmth and clarity. (pause) Let your mind follow the rising trail and feel your breath expand with each inhale. This steady uphill walk invites patience — a gentle reminder that progress can be slow but sure, that effort is met with growth and strength. Let your attention rest on the sensations in your body, the steady pulse of life moving through you.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>-> Pelham St  Start_3 @ -37.80324,144.96522 End_3 @ -37.80310,144.96789 [low elevation (mostly flat); ^ +3.2m; 37.7 -> 41.0m]</segment_header_raw>
+        <route_label>Pelham St</route_label>
+        <start lat="-37.80324" lon="144.96522" label="Start_3"/>
+        <end lat="-37.80310" lon="144.96789" label="End_3"/>
+        <elevation_raw>[low elevation (mostly flat); ^ +3.2m; 37.7 -> 41.0m]</elevation_raw>
+        <narration id="6">
+          Now as you enter Pelham St, the path flattens gently. Feel this ease in your legs as the incline softens. The rhythm of walking might feel lighter here, the muscles relaxing slightly. Notice the steady flow of your breath, smooth and calm. The partly sunny sky above offers a gentle warmth, inviting you to feel openness inside your chest and shoulders. (pause) Walking on this flatter stretch, imagine your mind becoming quieter, steady like the even ground beneath your feet. Enjoy the balance of effort and rest in this moment.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>-> the left  Start_4 @ -37.80310,144.96789 End_4 @ -37.79944,144.96852 [low elevation (mostly flat); ^ +1.6m; 41.0 -> 42.5m]</segment_header_raw>
+        <route_label>the left</route_label>
+        <start lat="-37.80310" lon="144.96789" label="Start_4"/>
+        <end lat="-37.79944" lon="144.96852" label="End_4"/>
+        <elevation_raw>[low elevation (mostly flat); ^ +1.6m; 41.0 -> 42.5m]</elevation_raw>
+        <narration id="7">
+          Turning to the left, the path remains mostly flat, inviting you to feel ease in your body. Your steps are steady, your breathing calm and even. Notice how your feet connect smoothly with the earth. The sun, partly hidden by clouds, casts a soft light, filling the space with gentle warmth. (pause) Allow yourself to be fully present here, resting in the natural rhythm of walking. Feel gratitude for this simple movement, this connection with your body and the world around you.
+        </narration>
+      </segment>
+    </segments>
+  </section>
+  <section type="compassion_meditation">
+    <min_words>2500.0</min_words>
+    <narration id="1">
+      Now, find yourself in a peaceful park under the partly sunny sky. The light dances softly through the leaves of the trees, casting gentle patterns on the grass. Take a deep breath in, feeling the fresh air fill your lungs, and slowly breathe out. (pause) Let your mind settle here in this calm place.
+    </narration>
+    <narration id="2">
+      Imagine the park as a space where kindness flows easily. As you sit or stand comfortably, bring to mind someone you care about. Picture their face with warmth and tenderness. Feel the soft wish in your heart for their happiness and well-being. (pause) Imagine sending them gentle waves of compassion, like light shining softly toward them, wrapping them in kindness and care.
+    </narration>
+    <narration id="3">
+      Now expand this feeling of compassion to yourself. Notice any places in your body where there might be tightness or discomfort. Send kindness to these areas, like a warm, soothing light. Allow yourself to be held by your own kindness, knowing you deserve care and understanding. (pause) Breathe in the feeling of gentle acceptance, breathe out any judgment or harshness.
+    </narration>
+    <narration id="4">
+      Picture others in this park — people you may not know, friends, strangers, or even those you find difficult. Imagine them also surrounded by this warm light of compassion. Let your heart open wide enough to include them all. Each breath you take sends out kindness that touches them softly. (pause) Know that this simple wish for others’ happiness connects us all, like threads woven through the air.
+    </narration>
+    <narration id="5">
+      Feel the soft breeze on your skin, carrying this compassion out into the world. The sun continues to shine partly through the clouds, reminding you that even when things feel uncertain, there is always light and warmth that can be shared. (pause) Let this warm feeling grow inside you like a gentle flame, steady and bright.
+      </narration>
+    <narration id="6">
+      As you breathe calmly, repeat silently to yourself: “May I be safe. May I be happy. May I be healthy. May I live with ease.” Then offer the same wishes to others: “May you be safe. May you be happy. May you be healthy. May you live with ease.” Feel the power in these simple words to open your heart and calm your mind.
+      </narration>
+    <narration id="7">
+      Imagine the grass under your feet, grounding you firmly in this moment. The trees sway gently, steady and strong. Feel yourself connected with the earth and sky, part of this vast kindness that flows through all living beings. (pause) Let this connection remind you that you are not alone, that you are held by love and care from all directions.
+      </narration>
+    <narration id="8">
+      If your mind wanders, gently bring your attention back to your breath and the feeling of compassion. Compassion is not only a feeling but also a practice — a gentle choice to see others and yourself with kindness, even when things are hard. (pause) Each breath you take here is a chance to grow that kindness deeper inside your heart.
+      </narration>
+    <narration id="9">
+      Now, imagine the partly sunny sky beginning to shift as clouds move slowly, letting more light stream down. See this light as a symbol of hope and healing, warming the hearts of everyone in the park and beyond. Let this light fill you completely, carrying with it all the compassion you have cultivated here today.
+      </narration>
+    <narration id="10">
+      Feel a deep sense of peace growing in your chest. Let this peace ripple outwards with your breath, touching every being you have imagined. Know that your compassion makes a difference — it creates a small, beautiful space of kindness in the world. (pause)
+      </narration>
+    <narration id="11">
+      Carry this feeling with you as you prepare to move from this peaceful park back into your day. Remember that compassion is always available within you, ready to be shared whenever you choose. With each breath, you nourish this gentle strength inside yourself.</narration>
+    <narration id="12">
+      As you end this meditation, feel gratitude for this moment of kindness — for yourself, for others, for the world. Let your heart be light, your mind calm, your spirit warm. (pause)
+      </narration>
+    <narration id="13">
+      Whenever you need, you can return here in your mind, to this partly sunny park, to this open heart. Compassion is a gift you give and receive, a never-ending light that brightens the path ahead. Breathe in kindness, breathe out love. (pause)
+    </narration>
+  </section>
+  <section type="closing_meditation">
+    <min_words>1500.0</min_words>
+    <narration>
+      As we come to the close of this meditation, I invite you to bring your attention gently back to the purpose that brought you here — the stressful meeting ahead. (pause) Know that the time you have taken for yourself is a wellspring of calm to carry with you now.</narration>
+    <narration id="1">
+      Feel the steady rhythm of your breath, anchoring you firmly in this present moment. Imagine breathing in a sense of calm confidence. Exhale any tension or worry that may have gathered in your body or mind. (pause) Let each breath remind you that you have the resources to meet challenges with clear eyes and a steady heart.
+      </narration>
+    <narration id="2">
+      Picture yourself entering the meeting space with a sense of groundedness. Your body is relaxed, your mind is clear, your spirit steady. You can respond thoughtfully, listen deeply, and speak with kindness and strength. (pause) This calm you have cultivated is your inner strength — a quiet power you can return to anytime.
+      </narration>
+    <narration id="3">
+      If you feel nervous or overwhelmed, breathe deeply and gently remind yourself: “I am prepared. I am capable. I can handle this moment.” Let these words settle deeply within, like roots growing quietly beneath the surface. (pause)
+      </narration>
+    <narration id="4">
+      Imagine the partly sunny sky as a symbol for your mindset — there may be moments of light and clarity, even when there are clouds of uncertainty. Both are part of the natural flow, and you can move through them with grace. (pause)
+      </narration>
+    <narration id="5">
+      Feel the sensations in your body — the softness of your shoulders, the steady beat of your heart, the calm flow of your breath. These physical sensations are your allies, always available to bring you back to peace. (pause)
+      </narration>
+    <narration id="6">
+      Remind yourself that stress is temporary, like a passing cloud. It does not define you or your day. You have the ability to observe it without being overwhelmed, to meet it with curiosity and kindness. (pause)
+      </narration>
+    <narration id="7">
+      Now, as you prepare to end this meditation, bring your hands gently to your heart or rest them softly in your lap. Feel gratitude for this moment of stillness, for the care you have given yourself. Know that this calm will accompany you through the meeting and beyond. (pause)
+      </narration>
+    <narration id="8">
+      Take one final deep breath in, filling your lungs completely, and breathe out slowly, releasing any last remnants of tension. When you are ready, gently open your eyes, carrying this gentle calm into the rest of your day. (pause)
+      </narration>
+    <narration id="9">
+      Remember, you are more than any stressful moment. You are steady, capable, and whole. May this calm presence support you always. (pause) Thank you for taking this time to be with yourself. Go forward with kindness and ease.
+    </narration>
+  </section>
+</meditation>
+
+
+NOW GENERATE THE XML.

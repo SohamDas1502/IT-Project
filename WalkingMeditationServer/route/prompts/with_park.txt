@@ -1,0 +1,49 @@
+You are a meditation teacher and scriptwriter.
+
+Write a 10-minute guided meditation
+
+First the meditation should start with focused attention component [FOCUSED_ATTENTION]
+- As we are doing the walking meditation
+- First set the background and bring attention to the walking, what you feeling on muscles
+- Generate a minimum {FAM_word_count} words related to Focused attention
+- Incorperate current weather condition {weatherCondition} in the Focued Attention part
+- Incorperate elevation details following in the Focued Attention part
+{source_to_park}
+- For example, in a high elevation road segment it is good to do walking walking attention meditation focusing on leg muscles as 
+inclination help, feels muslces more compared to a flat walk.
+- When returning stuff use the elevation details and give segment wise for each road
+- You don't need to say specific elevation levels (number) in the script. Just use uphill, flat etc keyword and build the story around it considering it a metaphor
+
+Second we need to have a compassion meditation [COMPASSION MEDITATION]
+- Here talk about compassion stuff
+- We do compassion meditation in a park, so you can use current weather condition {weatherCondition} inside the meditation
+- Generate a minimum {CM_word_count} words related to compassion meditation
+
+Finally we need have the closing part and address the purpose [CLOSING MEDITATION]
+- Purpose: {context}
+- Generate a minimum {Closing_word_count} words related the purpose and general ending
+
+
+Requirements:
+- Use simple language.
+- Include occasional "(pause)".
+- Avoid medical claims.
+- End gently.
+- The generate script should address the context
+- Return me only the content of meditation script and nothing else
+- Use elevation data where directed. When doing so use copy exact details without changing
+- Separate the sections as follows
+
+[FOCUSED_ATTENTION]
+content...
+
+<Franklin St toward Elizabeth St  Start_1 @ -37.80856,144.95947 End_1 @ -37.80680,144.96447 [high elevation (uphill); ^ +10.7m; 18.6 -> 29.3m]>
+segment specific content
+
+[COMPASSION MEDITATION]
+content...
+
+[CLOSING MEDITATION]
+content...
+
+Now write the script.

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<meditation duration_minutes="10" language="simple" includes_pauses="true">
+  <inputs>
+    <context>stressful meeting</context>
+    <weatherCondition>{'timeZone': {'id': 'Australia/Melbourne', 'version': ''}, 'weatherCondition': {'iconBaseUri': 'https://maps.gstatic.com/weather/v1/mostly_cloudy', 'description': {'text': 'Mostly cloudy', 'languageCode': 'en'}, 'type': 'MOSTLY_CLOUDY'}, 'temperature': {'unit': 'CELSIUS', 'degrees': 15.1}, 'feelsLikeTemperature': {'unit': 'CELSIUS', 'degrees': 14.4}, 'dewPoint': {'unit': 'CELSIUS', 'degrees': 5.9}, 'heatIndex': {'unit': 'CELSIUS', 'degrees': 15.1}, 'windChill': {'unit': 'CELSIUS', 'degrees': 14.4}, 'precipitation': {'probability': {'type': 'RAIN', 'percent': 7}, 'snowQpf': {'unit': 'MILLIMETERS', 'quantity': 0}, 'qpf': {'unit': 'MILLIMETERS', 'quantity': 0}}, 'airPressure': {'meanSeaLevelMillibars': 1021.03}, 'wind': {'direction': {'cardinal': 'NORTHWEST', 'degrees': 315}, 'speed': {'unit': 'KILOMETERS_PER_HOUR', 'value': 13}, 'gust': {'unit': 'KILOMETERS_PER_HOUR', 'value': 25}}, 'visibility': {'unit': 'KILOMETERS', 'distance': 16}, 'currentConditionsHistory': {'temperatureChange': {'unit': 'CELSIUS', 'degrees': 2.4}, 'maxTemperature': {'unit': 'CELSIUS', 'degrees': 14.8}, 'minTemperature': {'unit': 'CELSIUS', 'degrees': 7.9}, 'snowQpf': {'unit': 'MILLIMETERS', 'quantity': 0}, 'qpf': {'unit': 'MILLIMETERS', 'quantity': 1.6}}, 'currentTime': '2026-08-06T04:23:40.634709879Z', 'isDaytime': True, 'relativeHumidity': 53, 'uvIndex': 0, 'thunderstormProbability': 0, 'cloudCover': 65}</weatherCondition>
+    <elevationSegments>source @ -37.81017,144.96239
+-&gt; La Trobe St  Start_1 @ -37.81013,144.96237 End_1 @ -37.81004,144.96270 [low elevation (mostly flat); ^ +1.9m; 15.4 -&gt; 17.4m]
+-&gt; Turn right toward Swanston St
+Take the stairs  Start_2 @ -37.81004,144.96270 End_2 @ -37.81009,144.96272 [low elevation (mostly flat); ^ -0.0m; 17.4 -&gt; 17.3m]
+-&gt;   Start_3 @ -37.81009,144.96272 End_3 @ -37.81039,144.96298 [low elevation (mostly flat); ^ +0.4m; 17.3 -&gt; 17.7m]
+-&gt;   Start_4 @ -37.81039,144.96298 End_4 @ -37.81033,144.96302 [low elevation (mostly flat); ^ +0.3m; 17.7 -&gt; 18.0m]
+-&gt;   Start_5 @ -37.81033,144.96302 End_5 @ -37.81002,144.96358 [low elevation (mostly flat); ^ +3.3m; 18.0 -&gt; 21.3m]
+-&gt;   Start_6 @ -37.81002,144.96358 End_6 @ -37.80997,144.96378 [low elevation (mostly flat); ^ +1.2m; 21.3 -&gt; 22.5m]
+-&gt;   Start_7 @ -37.80997,144.96378 End_7 @ -37.80992,144.96381 [low elevation (mostly flat); ^ +0.4m; 22.5 -&gt; 22.9m]
+-&gt; Swanston St  Start_8 @ -37.80992,144.96381 End_8 @ -37.80991,144.96386 [low elevation (mostly flat); ^ +0.3m; 22.9 -&gt; 23.2m]
+-&gt; Swanston St  Start_9 @ -37.80991,144.96386 End_9 @ -37.80028,144.96385 [high elevation (uphill); ^ +15.0m; 23.2 -&gt; 38.1m]
+-&gt; the left  Start_10 @ -37.80028,144.96385 End_10 @ -37.80033,144.96419 [low elevation (mostly flat); ^ +0.8m; 38.1 -&gt; 38.9m]
+-&gt; destination @ -37.80028,144.96424</elevationSegments>
+  </inputs>
+  <section type="focused_attention">
+    <min_words>1250.0</min_words>
+    <narration id="1">
+      Welcome to this walking meditation on a mostly cloudy day in Melbourne. The air feels cool and fresh, around 15 degrees Celsius, with a gentle northwest wind brushing softly against your skin. As you prepare to begin your walk, bring your awareness to the sensations in your feet. Feel the gentle connection your feet make with the ground beneath you. (pause) Notice the solid support of the earth, steady and reliable, as you stand quietly for a moment.
+    </narration>
+    <narration id="2">
+      Begin to breathe naturally, noticing the rhythm of your breath as it flows in and out. Allow yourself to feel the coolness of the air as it moves gently across your face, carrying the scent of the city and the subtle freshness of nearby greenery. The sky above is mostly covered with clouds, softening the light and creating a calm, muted atmosphere. (pause) There is a peacefulness here, inviting you to slow down and notice your body moving.
+    </narration>
+    <narration id="3">
+      Now take your first step, slowly and mindfully. Feel the muscles in your legs engage as you lift your foot, the gentle stretch in your calf and thigh. Notice as your foot moves forward and then touches down again. Sense the subtle pressure and release as your foot rolls from heel to toe. Your breath remains steady, in harmony with the rhythm of your steps. (pause) Every movement is deliberate, a soft unfolding of body awareness.
+    </narration>
+    <narration id="4">
+      As you continue walking along La Trobe St, the path is mostly flat with a gentle rise ahead. The ground feels even beneath your feet, steady and reassuring. The light breeze from the northwest cools your skin softly. Your muscles feel awake, the slight effort of lifting your legs met with ease. With each step, feel the flow of energy in your body — the quiet strength of walking, steady and calm. (pause)
+    </narration>
+    <segments>
+      <segment>
+        <segment_header_raw>-> La Trobe St  Start_1 @ -37.81013,144.96237 End_1 @ -37.81004,144.96270 [low elevation (mostly flat); ^ +1.9m; 15.4 -> 17.4m]</segment_header_raw>
+        <route_label>La Trobe St</route_label>
+        <start lat="-37.81013" lon="144.96237" label="Start_1"/>
+        <end lat="-37.81004" lon="144.96270" label="End_1"/>
+        <elevation_raw>[low elevation (mostly flat); ^ +1.9m; 15.4 -> 17.4m]</elevation_raw>
+        <narration id="5">
+          Walking along La Trobe St, the path is mostly flat with a slight gentle rise. Feel the continuity in your legs as they respond to this subtle change in the road. Your feet ground you firmly, and your breath flows easily. The mostly cloudy sky diffuses the light evenly, making your surroundings feel soft and calm. The muscles in your legs engage with gentle strength, steady and balanced, like a soft wave rising and falling beneath you. (pause) Notice the quiet steadiness of this motion, the peaceful flow of your body walking mindfully.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>-> Turn right toward Swanston St
+Take the stairs  Start_2 @ -37.81004,144.96270 End_2 @ -37.81009,144.96272 [low elevation (mostly flat); ^ -0.0m; 17.4 -> 17.3m]</segment_header_raw>
+        <route_label>Turn right toward Swanston St, Take the stairs</route_label>
+        <start lat="-37.81004" lon="144.96270" label="Start_2"/>
+        <end lat="-37.81009" lon="144.96272" label="End_2"/>
+        <elevation_raw>[low elevation (mostly flat); ^ -0.0m; 17.4 -> 17.3m]</elevation_raw>
+        <narration id="6">
+          Now you turn right toward Swanston St and begin to take the stairs. Feel the change in your body as you lift your feet a little higher with each step. The motion is still gentle, the elevation mostly flat with a very slight descent. Notice the muscles in your legs and feet working together smoothly as you climb. The cool air moves softly around you, carrying a faint scent of rain and earth from the mostly cloudy sky above. (pause) Each stair brings a new rhythm, a steady pulse of movement and breath that keeps you grounded and present.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>->   Start_3 @ -37.81009,144.96272 End_3 @ -37.81039,144.96298 [low elevation (mostly flat); ^ +0.4m; 17.3 -> 17.7m]</segment_header_raw>
+        <route_label>Start_3 to End_3</route_label>
+        <start lat="-37.81009" lon="144.96272" label="Start_3"/>
+        <end lat="-37.81039" lon="144.96298" label="End_3"/>
+        <elevation_raw>[low elevation (mostly flat); ^ +0.4m; 17.3 -> 17.7m]</elevation_raw>
+        <narration id="7">
+          As you continue forward on this mostly flat segment, sense the smooth flow of your movement. Your legs feel relaxed yet engaged, the small upward shift encouraging a gentle lift in your step. The wind from the northwest brushes softly, keeping your skin comfortably cool. Notice how your breathing remains easy, steady like the quiet rise of a gentle hill. Walk with intention, feeling the connection between your body and the earth beneath. (pause)
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>->   Start_4 @ -37.81039,144.96298 End_4 @ -37.81033,144.96302 [low elevation (mostly flat); ^ +0.3m; 17.7 -> 18.0m]</segment_header_raw>
+        <route_label>Start_4 to End_4</route_label>
+        <start lat="-37.81039" lon="144.96298" label="Start_4"/>
+        <end lat="-37.81033" lon="144.96302" label="End_4"/>
+        <elevation_raw>[low elevation (mostly flat); ^ +0.3m; 17.7 -> 18.0m]</elevation_raw>
+        <narration id="8">
+          Moving gently forward, the path remains mostly flat with a soft rise. Feel the steady engagement in your legs and core as you continue. Your feet land softly, rolling smoothly from heel to toe. The air is fresh with a hint of moisture from the dew point early this morning, and the clouds above keep the light calm and soothing. (pause) Allow your mind to rest in this peaceful rhythm, steady and balanced, like a quiet current beneath the surface.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>->   Start_5 @ -37.81033,144.96302 End_5 @ -37.81002,144.96358 [low elevation (mostly flat); ^ +3.3m; 18.0 -> 21.3m]</segment_header_raw>
+        <route_label>Start_5 to End_5</route_label>
+        <start lat="-37.81033" lon="144.96302" label="Start_5"/>
+        <end lat="-37.81002" lon="144.96358" label="End_5"/>
+        <elevation_raw>[low elevation (mostly flat); ^ +3.3m; 18.0 -> 21.3m]</elevation_raw>
+        <narration id="9">
+          As you walk this stretch, note the subtle increase in elevation — an easy uphill. Feel your legs activate a little more, muscles strengthening with each step. The mostly cloudy sky diffuses the light, giving a soft, even glow around you. The gentle northwest wind brushes past, cool but comforting. Let your breath deepen slightly, matching the gentle effort of this incline. (pause) This walking is a reminder of steady progress, of quiet resilience in movement and breath.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>->   Start_6 @ -37.81002,144.96358 End_6 @ -37.80997,144.96378 [low elevation (mostly flat); ^ +1.2m; 21.3 -> 22.5m]</segment_header_raw>
+        <route_label>Start_6 to End_6</route_label>
+        <start lat="-37.81002" lon="144.96358" label="Start_6"/>
+        <end lat="-37.80997" lon="144.96378" label="End_6"/>
+        <elevation_raw>[low elevation (mostly flat); ^ +1.2m; 21.3 -> 22.5m]</elevation_raw>
+        <narration id="10">
+          Continuing on, the path remains mostly flat with a slight rise. Your legs carry you with steady strength, the muscles warm and responsive. The air feels fresh and cool, with a gentle breeze from the northwest. Notice the ease of your breathing, steady and calm. The clouds above create a soft light, surrounding you with gentle calm. (pause) Embrace this moment of steady presence, the quiet flow of walking and breathing moving together in harmony.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>->   Start_7 @ -37.80997,144.96378 End_7 @ -37.80992,144.96381 [low elevation (mostly flat); ^ +0.4m; 22.5 -> 22.9m]</segment_header_raw>
+        <route_label>Start_7 to End_7</route_label>
+        <start lat="-37.80997" lon="144.96378" label="Start_7"/>
+        <end lat="-37.80992" lon="144.96381" label="End_7"/>
+        <elevation_raw>[low elevation (mostly flat); ^ +0.4m; 22.5 -> 22.9m]</elevation_raw>
+        <narration id="11">
+          This short segment is mostly flat with a very gentle rise. Feel the subtle power in your legs as you maintain your steady pace. Your feet feel the smooth surface beneath, your breath steady and even. The mostly cloudy sky filters the daylight softly, creating a calm and gentle atmosphere. (pause) Allow your mind to rest on the simple joy of walking, the grounded sensation of each step connecting you to this moment.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>-> Swanston St  Start_8 @ -37.80992,144.96381 End_8 @ -37.80991,144.96386 [low elevation (mostly flat); ^ +0.3m; 22.9 -> 23.2m]</segment_header_raw>
+        <route_label>Swanston St Segment 1</route_label>
+        <start lat="-37.80992" lon="144.96381" label="Start_8"/>
+        <end lat="-37.80991" lon="144.96386" label="End_8"/>
+        <elevation_raw>[low elevation (mostly flat); ^ +0.3m; 22.9 -> 23.2m]</elevation_raw>
+        <narration id="12">
+          Entering Swanston St, the path remains mostly flat with a slight, gentle rise. Sense the calm determination in your legs as they carry you forward effortlessly. The breeze from the northwest cools your skin pleasantly, and the mostly cloudy sky spreads soft light all around. Notice how your breath stays relaxed, flowing smoothly in rhythm with your steps. (pause) Let this steady walking be a meditation, a way to anchor your awareness in the present moment.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>-> Swanston St  Start_9 @ -37.80991,144.96386 End_9 @ -37.80028,144.96385 [high elevation (uphill); ^ +15.0m; 23.2 -> 38.1m]</segment_header_raw>
+        <route_label>Swanston St Uphill</route_label>
+        <start lat="-37.80991" lon="144.96386" label="Start_9"/>
+        <end lat="-37.80028" lon="144.96385" label="End_9"/>
+        <elevation_raw>[high elevation (uphill); ^ +15.0m; 23.2 -> 38.1m]</elevation_raw>
+        <narration id="13">
+          Now you approach a longer uphill segment on Swanston St. Feel the steady engagement of your legs as they carry you upward with quiet strength. This climb invites you to notice the power in your body, the steady rhythm of your breath, and the calm focus in your mind. The air feels fresh as the northwest wind brushes gently, and the mostly cloudy sky diffuses the light evenly. With each step uphill, sense your resilience growing, the gentle effort met with peaceful determination. (pause) Allow your breath to deepen naturally, supporting you throughout this upward journey.
+        </narration>
+      </segment>
+      <segment>
+        <segment_header_raw>-> the left  Start_10 @ -37.80028,144.96385 End_10 @ -37.80033,144.96419 [low elevation (mostly flat); ^ +0.8m; 38.1 -> 38.9m]</segment_header_raw>
+        <route_label>Turn left near destination</route_label>
+        <start lat="-37.80028" lon="144.96385" label="Start_10"/>
+        <end lat="-37.80033" lon="144.96419" label="End_10"/>
+        <elevation_raw>[low elevation (mostly flat); ^ +0.8m; 38.1 -> 38.9m]</elevation_raw>
+        <narration id="14">
+          Turning left near your destination, the path becomes mostly flat again, with a gentle, easy rise. Feel the lightness in your legs as you continue walking calmly. The breeze cools your skin, and the mostly cloudy sky above keeps the light soft and gentle. Notice the peaceful rhythm of your breath and steps as you approach your destination. (pause) Let your body and mind savor this final stretch, steady and calm, grounded in the present moment.
+        </narration>
+      </segment>
+    </segments>
+  </section>
+  <section type="compassion_meditation">
+    <min_words>2500.0</min_words>
+    <narration id="1">
+      Now, imagine yourself in a peaceful park on this mostly cloudy day in Melbourne. The sky is a gentle blanket of soft gray clouds, letting through a calm, diffused light that feels cool and comforting. The temperature is mild, around 15 degrees Celsius, with a gentle breeze from the northwest that softly rustles the leaves above. (pause) Take a deep breath in, filling your lungs with the fresh, cool air, and breathe out slowly, letting your body settle into this calm, quiet place.
+    </narration>
+    <narration id="2">
+      Feel the ground beneath you — soft grass or earth, steady and supportive. Imagine the trees around you standing tall and strong, their branches moving gently in the breeze. Notice the subtle sounds of the park — birds calling softly, the whisper of leaves, the distant murmur of life. Allow yourself to be fully present here, in this place of calm and peace. (pause)
+    </narration>
+    <narration id="3">
+      Now bring to mind someone you care about deeply. Picture their face clearly in your mind, and feel the warmth and tenderness you hold for them in your heart. Sense your wish for their happiness, safety, and health. Imagine sending them gentle waves of kindness and compassion, like soft light flowing from your heart toward them, wrapping them in warmth and care. (pause)
+    </narration>
+    <narration id="4">
+      As you send this compassion, notice how it feels in your body — perhaps a soft warmth in your chest or a gentle lightness in your shoulders. Allow yourself to rest in this feeling of connection and care, both for the other person and for yourself. Compassion is a kindness that flows naturally when we open our hearts. (pause)
+    </narration>
+    <narration id="5">
+      Now, turn this compassion toward yourself. Notice any places in your body that might be tight, tired, or uncomfortable. With kindness, imagine sending a warm, soothing light to these areas. Let your breath carry that kindness deep inside you, allowing those places to soften and relax. (pause) Remember that you deserve care and understanding just as much as anyone else.
+    </narration>
+    <narration id="6">
+      As you sit or stand in this quiet park, imagine others around you — people you know, people you don’t know, even those you may find challenging. Picture them also surrounded by this warm light of compassion. Let your heart open wide enough to include them all, holding space for their happiness and ease. (pause) Each breath you take sends out waves of kindness, touching others gently, connecting all beings through simple goodwill.
+    </narration>
+    <narration id="7">
+      Feel the gentle breeze on your skin, carrying the essence of compassion through the air. The cool temperature and mostly cloudy sky remind you that even when the world feels uncertain or dim, there is always a light of warmth and kindness to be shared. (pause) Let this feeling grow inside you like a soft flame, steady and bright.
+    </narration>
+    <narration id="8">
+      As you breathe calmly, repeat silently to yourself: “May I be safe. May I be happy. May I be healthy. May I live with ease.” Let these words fill your heart with gentle affirmation. Then extend the same wishes outward: “May you be safe. May you be happy. May you be healthy. May you live with ease.” Feel the power of these intentions to open your heart and quiet your mind. (pause)
+    </narration>
+    <narration id="9">
+      Imagine the soft grass beneath your feet, grounding you firmly in this present moment. The trees sway gently overhead, steady and strong. Feel your connection to the earth and sky, part of a vast network of care and kindness flowing through all living beings. (pause) Let this sense of connection remind you that you are not alone; you are surrounded and supported by love from all directions.
+    </narration>
+    <narration id="10">
+      If your mind begins to wander, gently bring your attention back to your breath and the feeling of compassion. Compassion is not only a feeling but a practice — a gentle choice to see yourself and others with kindness, especially when times are hard. (pause) Each breath you take here is an opportunity to nurture that kindness, planting seeds of peace and care deep inside your heart.
+    </narration>
+    <narration id="11">
+      Now imagine the mostly cloudy sky shifting slowly as clouds move gently, letting more soft light stream down into the park. See this light as a symbol of hope and healing, warming the hearts of everyone in this place and beyond. Let this light fill you completely, carrying with it all the compassion you have cultivated here today. (pause)
+    </narration>
+    <narration id="12">
+      Feel a deep sense of peace growing in your chest. Let this peace ripple outward with every breath you take, touching every being you have imagined. Know that your compassion makes a difference — it creates a small, beautiful space of kindness in the world. (pause)
+    </narration>
+    <narration id="13">
+      Carry this feeling with you as you prepare to leave this peaceful park and return to your day. Remember that compassion is always available to you, ready to be shared whenever you choose. With each breath, you nourish this gentle strength deep within yourself. (pause)
+    </narration>
+    <narration id="14">
+      As this meditation draws to a close, feel gratitude for this moment of kindness — for yourself, for others, for the world around you. Let your heart be light, your mind calm, and your spirit warm. (pause) Whenever you need, you can return here in your mind, to this quiet park, to this open heart. Compassion is a gift you give and receive, a steady light that brightens the path ahead. Breathe in kindness, breathe out love. (pause)
+    </narration>
+  </section>
+  <section type="closing_meditation">
+    <min_words>1500.0</min_words>
+    <narration id="1">
+      As we come to the close of this meditation, gently bring your attention back to why you began — the stressful meeting ahead. (pause) Know that the calm and care you have gathered here are a wellspring of strength you can carry with you now.
+    </narration>
+    <narration id="2">
+      Feel the steady rhythm of your breath anchoring you in this present moment. Breathe in calm confidence, allowing it to fill every part of your being. Breathe out tension and worry, releasing what does not serve you. (pause) Each breath is a reminder that you have the inner resources to meet the challenges before you with clarity and balance.
+    </narration>
+    <narration id="3">
+      Picture yourself entering the meeting with a grounded presence. Your body is relaxed, your mind clear, your spirit steady. You listen deeply, respond thoughtfully, and speak with kindness and strength. (pause) This calm you carry is your quiet power, always available inside you.
+    </narration>
+    <narration id="4">
+      If nervousness or overwhelm arises, breathe deeply and remind yourself softly: “I am prepared. I am capable. I can handle this moment.” Let these words settle like roots growing quietly beneath the surface, steady and strong. (pause)
+    </narration>
+    <narration id="5">
+      Imagine the mostly cloudy sky as a symbol for your mindset. There may be moments of light and clarity, even when clouds of uncertainty linger. Both are part of the natural flow, and you can move through them with grace. (pause)
+    </narration>
+    <narration id="6">
+      Notice the sensations in your body — the softness in your shoulders, the steady beat of your heart, the calm flow of your breath. These sensations are your allies, always ready to bring you back to peace when you need it. (pause)
+    </narration>
+    <narration id="7">
+      Remember that stress is temporary, like a passing cloud drifting across the sky. It does not define you or your day. You can observe it with gentle curiosity and kindness, meeting it without being overwhelmed. (pause)
+    </narration>
+    <narration id="8">
+      As you prepare to finish this meditation, bring your hands gently to your heart or rest them softly in your lap. Feel gratitude for this moment of stillness, for the care you have given yourself. Know that this calm will accompany you through the meeting and beyond. (pause)
+    </narration>
+    <narration id="9">
+      Take one final deep breath in, filling your lungs fully, and breathe out slowly, releasing any last tension. When you are ready, gently open your eyes, carrying this gentle calm and steady presence into the rest of your day. (pause)
+    </narration>
+    <narration id="10">
+      Remember, you are more than any stressful moment. You are steady, capable, and whole. May this calm presence support you always. (pause) Thank you for taking this time to be with yourself. Go forward with kindness and ease.
+    </narration>
+  </section>
+</meditation>

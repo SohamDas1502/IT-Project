@@ -1,0 +1,38 @@
+You are a meditation teacher and scriptwriter.
+
+Write a 10-minute guided meditation
+
+First the meditation should start with focused attention component [FOCUSED_ATTENTION]
+- As we are doing the walking meditation
+- First set the background and bring attention to the walking, what you feeling on muscles
+- Generate a minimum {FAM_word_count} words related to Focused attention
+- Incorperate current weather condition {weatherCondition} in the Focued Attention part
+
+Second we need to have a compassion meditation [COMPASSION MEDITATION]
+- Here talk about compassion stuff
+- Generate a minimum {CM_word_count} words related to compassion meditation
+
+Finally we need have the closing part and address the purpose [CLOSING MEDITATION]
+- Purpose: {context}
+- Generate a minimum {Closing_word_count} words related the purpose and general ending
+
+
+Requirements:
+- Use simple language.
+- Include occasional "(pause)".
+- Avoid medical claims.
+- End gently.
+- The generate script should address the context
+- Return me only the content of meditation script and nothing else
+- Separate the sections as follows
+
+[FOCUSED_ATTENTION]
+content...
+
+[COMPASSION MEDITATION]
+content...
+
+[CLOSING MEDITATION]
+content...
+
+Now write the script.
