@@ -1,9 +1,15 @@
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 from pydantic import BaseModel, Field
 
 class LatLng(BaseModel):
     lat: float = Field(..., ge=-90, le=90)
     lon: float = Field(..., ge=-180, le=180)
+
+class ParkPlace(BaseModel):
+    place_id: str
+    name: str
+    lat: float
+    lon: float
 
 class RouteRequest(BaseModel):
     origin: LatLng
@@ -80,11 +86,9 @@ class PathDescriptionResponse(BaseModel):
 class ScriptWithParkRequest(BaseModel):
     source: LatLng
     destination: LatLng
-    park:LatLng
-    to_park_time: int
-    park_time: int
-    park_to_destination_time: int
-    context:str
+    park: ParkPlace  # same object returned in WalkRouteResponse.parks[i].park
+    total_travel_time: int  # seconds; same value sent to /generate-path
+    context: str
 
 class ScriptWithParkResponse(BaseModel):
     script: str
@@ -103,13 +107,6 @@ class RouteInfo(BaseModel):
     duration_s: int
     distance_m: int
     polyline: str
-
-class ParkPlace(BaseModel):
-    place_id: str
-    name: str
-    lat: float
-    lon: float
-    
 
 class ParkDetourResult(BaseModel):
     park: ParkPlace
@@ -142,6 +139,21 @@ class TTSResponse(BaseModel):
     filename: str = "speech.mp3"
     media_type: str = "audio/mpeg"
 
+class OsmLandmark(BaseModel):
+    osm_id: int
+    kind: str
+    name: Optional[str] = None
+    lat: float
+    lon: float
+
+
+class ParkLandmarks(BaseModel):
+    center: LatLng
+    radius_m: int
+    landmarks: List[OsmLandmark] = Field(default_factory=list)
+    tree_count: int = 0
+
+
 class StepSegment(BaseModel):
     i: int
     instruction: str
@@ -152,5 +164,6 @@ class StepSegment(BaseModel):
     elev_end_m: float
     elev_gain_m: float
     label: str
+    landmarks: List[OsmLandmark] = Field(default_factory=list)
 
 

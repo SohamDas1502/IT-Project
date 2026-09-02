@@ -15,6 +15,8 @@ load_dotenv()
 GOOGLE_ROUTES_URL = "https://routes.googleapis.com/directions/v2:computeRoutes"
 GOOGLE_PLACES_NEARBY_URL = "https://places.googleapis.com/v1/places:searchNearby"
 
+OVERPASS_URL = "https://overpass-api.de/api/interpreter"
+
 def google_maps_api_key() -> str:
     key = os.getenv("GOOGLE_MAPS_API_KEY")
     if not key:

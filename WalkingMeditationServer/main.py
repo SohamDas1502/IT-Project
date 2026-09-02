@@ -93,9 +93,7 @@ async def generate_script_w_park(payload: ScriptWithParkRequest):
             payload.source,
             payload.destination,
             payload.park,
-            payload.to_park_time,
-            payload.park_time,
-            payload.park_to_destination_time,
+            payload.total_travel_time,
             payload.context
         )
 

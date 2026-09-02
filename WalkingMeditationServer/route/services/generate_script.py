@@ -2,12 +2,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import httpx
 
-from route.models import LatLng
+from route.models import LatLng, ParkPlace
 from route.persistence.script_storage import save_script_text
 from route.clients.openai_client import generate_text
 from route.clients.google_weather import current_weather_lookup
-from route.services.enrich_elevation import source_to_dest_elevation
+from route.clients.google_routes import compute_walking_route
+from route.services.build_path_segments import build_park_detour_segments
+from route.services.enrich_landmarks import enrich_segments_with_landmarks
+from route.services.enrich_elevation import source_to_dest_elevation, print_segments
 from route.config import get_script_generation_prompt, render_template
 
 WITH_PARK_FAM = 0.2
@@ -25,25 +29,53 @@ def _words_for_minutes(minutes: float, *, wpm: int = 150) -> int:
 async def generate_script_with_park(
     source: LatLng,
     destination: LatLng,
-    park: LatLng,
-    to_park_time: int,                 # seconds
-    park_time: int,                    # seconds
-    park_to_destination_time: int,      # seconds
+    park: ParkPlace,
+    total_travel_time: int,   # seconds; whole walk's time budget
     context: str,
     output_folder: Path = DEFAULT_OUTPUT_FOLDER,
     save_to_disk: bool = True,
 ) -> str:
+    park_latlng = LatLng(lat=park.lat, lon=park.lon)
+
+    # Real path through the detour: source -> park, then park -> destination.
+    # (Was previously computing elevation for source -> destination directly,
+    # which ignored the park detour entirely.)
+    to_park_segments, _park_to_dest_segments = await build_park_detour_segments(
+        source, park_latlng, destination
+    )
+
+    # Step segments carry geometry, not duration, so fetch each leg's
+    # walking time separately to split total_travel_time across the
+    # focused_attention / compassion_meditation / closing sections.
+    async with httpx.AsyncClient(timeout=40) as client:
+        to_park_route = await compute_walking_route(
+            client, source, park_latlng, want_polyline=False
+        )
+        park_to_dest_route = await compute_walking_route(
+            client, park_latlng, destination, want_polyline=False
+        )
+
+    to_park_time = to_park_route.duration_s
+    park_to_destination_time = park_to_dest_route.duration_s
+    # Whatever's left of the budget after both walking legs is time in the park.
+    park_time = max(total_travel_time - to_park_time - park_to_destination_time, 0)
+
+    # Word counts pace the narration to match how long each part of the
+    # walk actually takes, so the audio doesn't run out early or drag on
+    # after the user has moved on. The LLM has no way to know these
+    # durations itself, so we compute the target length here.
     fam_words = _words_for_minutes(to_park_time / 60)
     cm_words = _words_for_minutes(park_time / 60)
     closing_words = _words_for_minutes(park_to_destination_time / 60)
 
     weather_condition = current_weather_lookup(park.lat, park.lon)
 
-    # BUG
-    # Source to dest elevation generates StepSegments (src -> steps 1-3 -> dest), with elevation info
-    # But here we are actually not taking into account the park detour, only computes elevation StepSegment data for baseline route
-    # I think we can just to source to dest elevation from source -> park and then park -> dest
-    source_to_park = await source_to_dest_elevation(source=source, destination=destination)
+    # Attach nearby OSM landmarks (benches, fountains, etc.) to each
+    # segment. Not read by the prompt yet — print_segments below still
+    # only writes out elevation info — this just gets the data flowing.
+    to_park_segments = await enrich_segments_with_landmarks(to_park_segments)
+
+    source_to_park = print_segments(to_park_segments, source, park_latlng)
 
     print("\n\n\n\n\nSource to destination", source_to_park)
 
