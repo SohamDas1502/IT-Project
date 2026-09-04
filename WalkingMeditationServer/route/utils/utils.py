@@ -4,7 +4,7 @@ import math
 import polyline as poly_decoder
 import subprocess
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, List, Tuple
 
 from route.errors import GoogleRoutesError, AudioConversionError
 
@@ -45,6 +45,19 @@ def haversine_m(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     a = math.sin(dphi / 2) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(dl / 2) ** 2
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return r * c
+
+def interpolate_points(
+    lat1: float, lon1: float, lat2: float, lon2: float, spacing_m: float
+) -> List[Tuple[float, float]]:
+    """Points along the straight line from (lat1,lon1) to (lat2,lon2),
+    spaced ~spacing_m apart. Always includes both endpoints."""
+    length = haversine_m(lat1, lon1, lat2, lon2)
+    n = max(1, math.ceil(length / spacing_m))
+    return [
+        (lat1 + (lat2 - lat1) * i / n, lon1 + (lon2 - lon1) * i / n)
+        for i in range(n + 1)
+    ]
+
 
 def _ensure_ffmpeg():
     try:

@@ -89,6 +89,7 @@ async def generate_route(payload: WalkRouteRequest):
 @app.post("/route/generate-script/park", response_model=ScriptWithParkResponse)
 async def generate_script_w_park(payload: ScriptWithParkRequest):
     try:
+        # The frontend relays the chosen park object as part of the payload back to the backend
         result: str = await generate_script_with_park(
             payload.source,
             payload.destination,
