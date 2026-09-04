@@ -87,13 +87,13 @@ async def generate_script_with_park(
         source_to_park="\n".join(source_to_park),
         CM_word_count=cm_words,
         Closing_word_count=closing_words,
-        weatherCondition= weather_condition,
+        weatherCondition=weather_condition,
     )
 
     script = await generate_text(prompt)
 
     if save_to_disk:
-       save_script_text(script, output_folder, prefix="meditation_script")
+        save_script_text(script, output_folder, prefix="meditation_script")
 
     return script
 
@@ -128,6 +128,6 @@ async def generate_script_without_park(
     script = await generate_text(prompt)
 
     if save_to_disk:
-       save_script_text(script, output_folder, prefix="meditation_script")
+        save_script_text(script, output_folder, prefix="meditation_script")
 
     return await generate_text(prompt)

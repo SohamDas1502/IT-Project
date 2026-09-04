@@ -8,9 +8,6 @@ from typing import Dict, Any, List, Tuple
 
 from route.errors import GoogleRoutesError, AudioConversionError
 
-import subprocess
-from pathlib import Path
-
 
 _DURATION_RE = re.compile(r"^(\d+)s$")
 
@@ -34,6 +31,7 @@ def polyline_to_path_string(encoded_polyline: str) -> str:
     return ";".join(f"{lat},{lon}" for lat, lon in decoded_points)
 
 
+# Pythagoras won't work here since the earth is curved; haversine is accurate.
 def haversine_m(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     # Great-circle distance (meters)
     r = 6371000.0
@@ -45,6 +43,7 @@ def haversine_m(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     a = math.sin(dphi / 2) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(dl / 2) ** 2
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return r * c
+
 
 def interpolate_points(
     vertices: List[Tuple[float, float]], spacing_m: float
@@ -97,7 +96,7 @@ def _ensure_ffmpeg():
 #         stderr=subprocess.DEVNULL,
 #     )
 
-    
+
 def classify_step(elev_gain_m: float, elev_start_m: float, elev_end_m: float) -> str:
     """
     Replace with your own semantics.
