@@ -47,16 +47,33 @@ def haversine_m(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return r * c
 
 def interpolate_points(
-    lat1: float, lon1: float, lat2: float, lon2: float, spacing_m: float
+    vertices: List[Tuple[float, float]], spacing_m: float
 ) -> List[Tuple[float, float]]:
-    """Points along the straight line from (lat1,lon1) to (lat2,lon2),
-    spaced ~spacing_m apart. Always includes both endpoints."""
-    length = haversine_m(lat1, lon1, lat2, lon2)
-    n = max(1, math.ceil(length / spacing_m))
-    return [
-        (lat1 + (lat2 - lat1) * i / n, lon1 + (lon2 - lon1) * i / n)
-        for i in range(n + 1)
-    ]
+    """Points every spacing_m along the real path described by vertices
+    (e.g. a decoded polyline), not a straight line between its endpoints.
+    Walks vertex-to-vertex, dropping a new point (interpolated, not
+    necessarily a vertex itself) whenever the running distance crosses the
+    next spacing_m mark. Always includes the first and last vertex."""
+    points = [vertices[0]]
+    leftover = 0.0
+
+    for (lat1, lon1), (lat2, lon2) in zip(vertices, vertices[1:]):
+        seg_len = haversine_m(lat1, lon1, lat2, lon2)
+        if seg_len == 0:
+            continue
+
+        dist_into_seg = spacing_m - leftover
+        while dist_into_seg <= seg_len:
+            t = dist_into_seg / seg_len
+            points.append((lat1 + (lat2 - lat1) * t, lon1 + (lon2 - lon1) * t))
+            dist_into_seg += spacing_m
+
+        leftover = seg_len - (dist_into_seg - spacing_m)
+
+    if points[-1] != vertices[-1]:
+        points.append(vertices[-1])
+
+    return points
 
 
 def _ensure_ffmpeg():

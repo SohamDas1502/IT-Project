@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import List, Set
 
 import httpx
+import polyline as poly_decoder
 
 from route.clients.osm_overpass import fetch_landmarks
 from route.models import LatLng, ParkLandmarks, ParkPlace, StepSegment
@@ -40,22 +41,20 @@ async def enrich_segments_with_landmarks(
     Look up nearby OSM landmarks for each step segment (a street block),
     and attach them to that segment.
 
-    Each segment's line (start -> end) is walked in point_spacing_m steps,
-    and each point is queried separately (one Overpass call per point, no
-    batching yet). Neighbouring points/segments can have overlapping search
-    circles, so once a landmark has been attached once, it's skipped on
-    later ones — otherwise the same bench could end up mentioned twice.
+    Each segment's real path (its decoded polyline, not just start -> end)
+    is walked in point_spacing_m steps, and each point is queried separately
+    (one Overpass call per point, no batching yet). Neighbouring
+    points/segments can have overlapping search circles, so once a landmark
+    has been attached once, it's skipped on later ones — otherwise the same
+    bench could end up mentioned twice.
     """
     seen_osm_ids: Set[int] = set()
     enriched_segments: List[StepSegment] = []
 
     async with httpx.AsyncClient() as client:
         for segment in segments:
-            points = interpolate_points(
-                segment.start.lat, segment.start.lon,
-                segment.end.lat, segment.end.lon,
-                spacing_m=point_spacing_m,
-            )
+            vertices = poly_decoder.decode(segment.step_polyline)
+            points = interpolate_points(vertices, spacing_m=point_spacing_m)
 
             segment_landmarks = []
             for lat, lon in points:
