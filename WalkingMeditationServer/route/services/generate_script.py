@@ -10,7 +10,10 @@ from route.clients.openai_client import generate_text
 from route.clients.google_weather import current_weather_lookup
 from route.clients.google_routes import compute_walking_route
 from route.services.build_path_segments import build_park_detour_segments
-from route.services.enrich_landmarks import enrich_segments_with_landmarks
+from route.services.enrich_landmarks import (
+    enrich_segments_with_landmarks,
+    enrich_park_with_landmarks,
+)
 from route.services.enrich_elevation import source_to_dest_elevation, print_segments
 from route.config import get_script_generation_prompt, render_template
 
@@ -71,9 +74,12 @@ async def generate_script_with_park(
     weather_condition = current_weather_lookup(park.lat, park.lon)
 
     # Attach nearby OSM landmarks (benches, fountains, etc.) to each
-    # segment. Not read by the prompt yet — print_segments below still
-    # only writes out elevation info — this just gets the data flowing.
+    # segment, and separately to the park itself.
     to_park_segments = await enrich_segments_with_landmarks(to_park_segments)
+
+    _park_to_dest_segments = await enrich_segments_with_landmarks(_park_to_dest_segments)
+
+    park_landmarks = await enrich_park_with_landmarks(park)
 
     source_to_park = print_segments(to_park_segments, source, park_latlng)
 
