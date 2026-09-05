@@ -1,0 +1,30 @@
+services:
+  api:
+    build: .
+    image: walking-meditation-server:dev
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      # Live-reload: your local checkout is the code the container runs.
+      - .:/app
+      # Model weights cache — shared across rebuilds, ~1-2GB after first run.
+      - hf-cache:/opt/hf-cache
+    command: >
+      uvicorn main:app
+      --host 0.0.0.0
+      --port 8000
+      --reload
+      --reload-exclude 'env/*'
+      --reload-exclude '.venv/*'
+    # First TTS request loads the model; give the healthcheck room.
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 120s
+
+volumes:
+  hf-cache:
