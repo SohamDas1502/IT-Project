@@ -4,10 +4,11 @@ from typing import List, Set
 
 import httpx
 import polyline as poly_decoder
+from shapely.geometry import Point, Polygon
 
-from route.clients.osm_overpass import fetch_landmarks
+from route.clients.osm_overpass import fetch_landmarks, fetch_park_polygon
 from route.models import LatLng, ParkLandmarks, ParkPlace, StepSegment
-from route.utils.utils import interpolate_points
+from route.utils.utils import haversine_m, interpolate_points
 
 SEGMENT_LANDMARK_RADIUS_M = 35
 SEGMENT_POINT_SPACING_M = 70
@@ -16,16 +17,55 @@ SEGMENT_POINT_SPACING_M = 70
 async def enrich_park_with_landmarks(
     park: ParkPlace,
     *,
-    radius_m: int = 150,
+    fallback_radius_m: int = 150,
 ) -> ParkLandmarks:
+    """Landmarks inside the park's real OSM boundary, not a circle guess.
+
+    Fetches the park's actual polygon and keeps only landmarks that fall
+    inside it — so a long thin park doesn't pull in a bench from the
+    building next door the way a plain radius search would. If no OSM
+    polygon can be found for this park, falls back to the old radius
+    search around its center point.
+    """
     async with httpx.AsyncClient() as client:
-        landmarks, tree_count = await fetch_landmarks(
-            client, lat=park.lat, lon=park.lon, radius_m=radius_m
+        rings = await fetch_park_polygon(client, lat=park.lat, lon=park.lon)
+
+        polygon = None
+        for ring in rings:
+            candidate = Polygon([(lon, lat) for lat, lon in ring])
+            if candidate.contains(Point(park.lon, park.lat)):
+                polygon = candidate
+                break
+
+        if polygon is None:
+            landmarks, tree_count = await fetch_landmarks(
+                client, lat=park.lat, lon=park.lon, radius_m=fallback_radius_m
+            )
+            return ParkLandmarks(
+                center=LatLng(lat=park.lat, lon=park.lon),
+                radius_m=fallback_radius_m,
+                landmarks=landmarks,
+                tree_count=tree_count,
+            )
+
+        # Query a circle big enough to cover the whole polygon, then keep
+        # only the landmarks that are actually inside its real boundary.
+        min_lon, min_lat, max_lon, max_lat = polygon.bounds
+        cover_radius_m = int(max(
+            haversine_m(park.lat, park.lon, max_lat, max_lon),
+            haversine_m(park.lat, park.lon, min_lat, min_lon),
+            haversine_m(park.lat, park.lon, max_lat, min_lon),
+            haversine_m(park.lat, park.lon, min_lat, max_lon),
+        )) + 20
+
+        candidates, tree_count = await fetch_landmarks(
+            client, lat=park.lat, lon=park.lon, radius_m=cover_radius_m
         )
+        landmarks = [lm for lm in candidates if polygon.contains(Point(lm.lon, lm.lat))]
 
     return ParkLandmarks(
         center=LatLng(lat=park.lat, lon=park.lon),
-        radius_m=radius_m,
+        radius_m=cover_radius_m,
         landmarks=landmarks,
         tree_count=tree_count,
     )

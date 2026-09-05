@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 import httpx
 
@@ -38,6 +38,31 @@ def _build_query(lat: float, lon: float, radius_m: int) -> str:
 out body;
 node["natural"="tree"](around:{radius_m},{lat},{lon});
 out count;"""
+
+
+async def fetch_park_polygon(
+    client: httpx.AsyncClient,
+    *,
+    lat: float,
+    lon: float,
+    search_radius_m: int = 300,
+) -> List[List[Tuple[float, float]]]:
+    """Find OSM park way(s) near (lat, lon) and return each one's boundary
+    as a list of (lat, lon) vertices. Returns one ring per candidate way —
+    there can be more than one leisure=park way nearby, so the caller picks
+    whichever ring actually contains the point."""
+    query = f"""[out:json][timeout:25];
+way["leisure"="park"](around:{search_radius_m},{lat},{lon});
+out geom;"""
+
+    r = await client.post(OVERPASS_URL, data={"data": query}, headers=HEADERS, timeout=40.0)
+    r.raise_for_status()
+    ways = r.json().get("elements") or []
+    return [
+        [(pt["lat"], pt["lon"]) for pt in way["geometry"]]
+        for way in ways
+        if way.get("geometry")
+    ]
 
 
 async def fetch_landmarks(
